@@ -1,0 +1,520 @@
+
+--- Page 1 ---
+Page 1 of 17 
+A CASE STUDY 
+Software Requirements Specification Document 
+Version 1.0 
+LOBBY   –   Visitor Management System 
+in IEEE Format 
+Course: Software Engineering 
+Phase: Requirements Specification 
+Assignment Type: Group Project 
+Date: August 2026 
+
+--- Page 2 ---
+Page 2 of 17 
+TABLE OF CONTENTS 
+Chapter No.   Topic   Page No. 
+1.   Introduction   3 
+1.1   Purpose of this Document   3 
+1.2   Scope of the Development Project   3 
+1.3   Definitions, Abbreviations and Acronyms   4 
+1.4   References   5 
+1.5   Overview   6 
+2.   Overall Description   7 
+2.1   Product Perspective   7 
+2.2   Product Functions   7 
+2.3   User Characteristics   8 
+2.4   General Constraints, Assumptions and Dependencies   8 
+2.5   Apportioning of the Requirements   9 
+3.   Specific Requirements   10 
+3.1   External Interface Requirements   10 
+3.2   Detailed Description of Functional Requirements   10 
+3.2.1   Functional Requirements for Student/Faculty Module   10 
+3.2.2   Functional Requirements for Admin Module   11 
+3.2.3   Functional Requirements for Security Module   11 
+3.2.4   Functional Requirements for Group Import Module   11 
+3.2.5   Functional Requirements for Temporary Visitor Code Module   12 
+3.3   Performance Requirements   13 
+3.4   Logical Database Requirements   14 
+3.5   Quality Attributes   15 
+3.6   Other Requirements   16 
+4.   Change History   17 
+5.   Document Approvers   17 
+
+--- Page 3 ---
+Page 3 of 17 
+1. Introduction 
+1.1 Purpose of this Document 
+The purpose of this Software Requirements Specification (SRS) document is to provide a detailed
+overview of the LOBBY Visitor Management System, its parameters, and goals. This document
+describes the project's target audience, user interfaces, hardware and software requirements, and
+functional behaviour. It defines how the client, development team, and end users view the product
+and its functionality. 
+This SRS serves as a contract between the stakeholders and the development team. It establishes
+a common understanding of the system requirements and provides a baseline for design,
+implementation, testing, and validation activities. 
+1.2 Scope of the Development Project 
+LOBBY is a web-based visitor management system designed for a college or university campus.
+The primary objective is to centralize visitor details, streamline the entry and exit process, and
+reduce reliance on manual registers, phone calls, and messaging. 
+At present, visitor details are often written in paper registers or managed through informal
+communication. This makes it difficult to retrieve historical records and to know which visitors
+are currently inside the campus. LOBBY addresses these problems by providing role-based access
+for Students/Faculty, Admin, and Security Staff. 
+The system shall support the following core capabilities: 
+1.   Student or Faculty members can raise visitor requests that are forwarded to Admin for 
+approval and, after approval, made available to Security at the gate. 
+2.   Security Staff can register direct (walk-in) visitors who arrive without a prior request, 
+assign permitted date and time, and extend the allowed duration when necessary. 
+3.   When a visitor's allowed time expires and exit has not been recorded, Security and Admin 
+receive notifications; the visitor may also receive an alert via message or email. 
+4.   Large groups (for example, students from another institution) can submit details in an Excel 
+or CSV file. Admin imports the file, reviews the data, and approves the group in a single 
+operation. 
+5.   Students/Faculty can create temporary visitor codes for regular relatives, valid for a defined 
+period, so that repeated data entry is avoided while Security still records each entry and 
+exit. 
+The main aim of LOBBY is to reduce manual work, maintain accurate visitor records, and make
+campus visitor management more efficient and transparent. 
+
+--- Page 4 ---
+Page 4 of 17 
+The first version of the system is limited to a single campus. Facial recognition, biometric
+verification, RFID, and automatic gates are outside the current scope; visitor identity will be
+verified manually by Security Staff. 
+1.3 Definitions, Abbreviations and Acronyms 
+Table 1 gives explanations of the most commonly used terms in this SRS document. 
+Table 1: Definitions for most commonly used terms 
+S.No.   Term   Definition 
+1   Visitor   Any person who is not a regular student, faculty, or staff member of the 
+campus and who seeks temporary access for a defined purpose and duration. 
+2   Host   The Student, Faculty member, or department that the visitor intends to meet 
+or visit. 
+3   Visitor Request   A formal submission by a Student or Faculty member containing visitor 
+details, purpose, host, expected date and time, pending Admin approval. 
+4   Direct Visitor   A visitor who arrives at the gate without a prior Student/Faculty request and 
+is registered on the spot by Security Staff. 
+5   Temporary Visitor Code   A time-bound alphanumeric code created by a Student/Faculty member for 
+a regular relative so that repeated full data entry is not required. 
+6   Group Import 
+The process of uploading an Excel or CSV file containing details of multiple 
+visitors (e.g., an external student group) for bulk review and approval by
+Admin. 
+7   Inside Campus   Status indicating that a visitor has been recorded as entered by Security and 
+has not yet recorded an exit. 
+8   Time Expired   Status indicating that the permitted visiting time has ended and exit has not 
+been recorded. 
+Table 2 gives the full form of most commonly used abbreviations and acronyms. 
+Table 2: Abbreviations and Acronyms 
+S.No.   Abbreviation   Full Form 
+1   SRS   Software Requirements Specification 
+2   CSV   Comma-Separated Values 
+3   RBAC   Role-Based Access Control 
+4   UI   User Interface 
+5   API   Application Programming Interface 
+6   DBMS   Database Management System 
+
+--- Page 5 ---
+Page 5 of 17 
+1.4 References 
+[1]. Visitor Management Definition. Link:   https://en.wikipedia.org/wiki/Visitor_management 
+[2]. Role-Based Access Control (RBAC) Definition. Link:   https://en.wikipedia.org/wiki/Role- 
+based_access_control 
+[3].   Software   Requirements   Specification   Definition.   Link: 
+https://en.wikipedia.org/wiki/Software_requirements_specification 
+[4]. Access Control Definition. Link:   https://en.wikipedia.org/wiki/Access_control 
+[5]. Comma-Separated Values (CSV) File Format. Link:   https://en.wikipedia.org/wiki/Comma- 
+separated_values 
+[6]. IEEE Std 830-1998   –   IEEE Recommended Practice for Software Requirements Specifications. 
+Link:   https://ieeexplore.ieee.org/document/720574 
+[7]. IEEE 830-1998 Standard Page (IEEE SA). Link:   https://standards.ieee.org/standard/830- 
+1998.html 
+[8]. ISO/IEC/IEEE 29148:2018   –   Systems and software engineering   —   Life cycle processes   — 
+Requirements engineering. Link:   https://www.iso.org/standard/72089.html 
+[9].   ISO/IEC   27001   –   Information   Security   Management   Systems.   Link: 
+https://www.iso.org/standard/27001 
+[10]. NIST SP 800-53 Rev. 5   –   Security and Privacy Controls for Information Systems and 
+Organizations. Link:   https://doi.org/10.6028/NIST.SP.800-53r5 
+[11]. NIST Role-Based Access Control Project. Link:   https://csrc.nist.gov/projects/role-based- 
+access-control 
+[12]. R. Sandhu, D. Ferraiolo, and R. Kuhn. The NIST Model for Role-Based Access Control: 
+Towards   a   Unified   Standard.   ACM   RBAC   Workshop,   2000.   Link: 
+https://csrc.nist.gov/pubs/conference/2000/07/26/nist-model-for-rbac-towards-a-unified- 
+standard/final 
+[13]. R. S. Sandhu, E. J. Coyne, H. L. Feinstein, and C. E. Youman. Role-Based Access Control 
+Models. IEEE Computer, Vol. 29, No. 2, 1996. Link:   https://doi.org/10.1109/2.485845 
+[14]. J. N. D. Rivera. Academic visitor management system with pervasive mobile integration. 
+Science   Talks,   Vol.   12,   2024.   Link: 
+https://www.sciencedirect.com/science/article/pii/S277256932400104X 
+[15]. D. Alkhodary, I. A. Abu-AlSondos, B. J. A. Ali, M. Shehadeh, and H. Salhab. Visitor 
+Management System Design and Implementation during the Covid-19 Pandemic. Information
+Sciences   Letters,   2022.   PDF   Link: 
+https://www.naturalspublishing.com/files/published/6p3jg121583s5s.pdf 
+
+--- Page 6 ---
+Page 6 of 17 
+[16]. Partner Alliance for Safer Schools (PASS). Enhancing School Safety Through Effective 
+Visitor Management Systems. White Paper, 2024. Link:   https://passk12.org/whitepapers/visitor- 
+management-systems/ 
+[17]. Campus Security Today. Access Control and Visitor Management: The Power of Integration. 
+February   2022.   Link:   https://campussecuritytoday.com/articles/2022/02/01/access-control-and- 
+visitor-management.aspx 
+[18]. OWASP Application Security Verification Standard (ASVS). Link:   https://owasp.org/www- 
+project-application-security-verification-standard/ 
+[19].   OWASP   Authentication   Cheat   Sheet.   Link: 
+https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html 
+[20].   Ian   Sommerville.   Software   Engineering   (textbook).   Link: 
+https://iansommerville.com/professional/books/ 
+[21]. Roger S. Pressman and Bruce R. Maxim. Software Engineering: A Practitioner’s Approach. 
+McGraw-Hill.   Link:   https://www.mheducation.com/highered/product/software-engineering-a- 
+practitioners-approach-pressman.html 
+[22]. Karl Wiegers and Joy Beatty. Software Requirements, 3rd Edition. Microsoft Press, 2013. 
+Link:   https://www.microsoftpressstore.com/store/software-requirements-9780735679665 
+[23].   GDPR   –   General   Data   Protection   Regulation   (EU)   2016/679.   Link:   https://eur- 
+lex.europa.eu/eli/reg/2016/679/oj 
+[24]. RFID Definition (outside current LOBBY scope). Link:   https://en.wikipedia.org/wiki/RFID 
+[25].   Biometric   Authentication   Definition   (outside   current   LOBBY   scope).   Link: 
+https://en.wikipedia.org/wiki/Biometrics 
+1.5 Overview 
+The remaining sections of this document provide a general description of the product, including 
+characteristics of the users, product functions, constraints, and assumptions. Section 2 presents the
+overall description. Section 3 specifies the detailed functional and non-functional requirements,
+external interfaces, performance criteria, logical database requirements, and quality attributes.
+Sections 4 and 5 record change history and document approvers. 
+
+--- Page 7 ---
+Page 7 of 17 
+2. Overall Description 
+2.1 Product Perspective 
+LOBBY is a standalone web-based application that runs on campus network infrastructure and is 
+accessible through standard web browsers. It is not a component of a larger existing product;
+however, it may later integrate with campus identity systems or notification gateways. 
+The system operates with three primary user roles interacting through role-specific dashboards: 
+•   Student/Faculty   –   initiate visitor requests, create temporary codes, and view request 
+history. 
+•   Admin   –   approve or reject requests, import group visitor lists, manage users, and view 
+reports. 
+•   Security Staff   –   verify approved visitors at the gate, register direct visitors, record 
+entry/exit, extend time, and validate temporary codes. 
+All visitor data, request statuses, entry/exit timestamps, and codes are stored in a central relational 
+database. The system requires network connectivity (campus network or internet) for operation.
+Notifications (in-app, email, or message) are used to inform stakeholders of status changes and
+time-expiry events. 
+The product does not rely on specialized hardware such as smart-card readers, biometric devices, 
+or automatic barriers in the first version. Visitor identity verification remains a manual process
+performed by Security Staff at the physical gate. 
+2.2 Product Functions 
+The product shall be able to perform the following major operations: 
+1.   Authenticate users (Student/Faculty, Admin, Security) and enforce role-based access to 
+features. 
+2.   Allow Students/Faculty to submit visitor requests with visitor details, purpose, host, 
+expected date and time. 
+3.   Allow Admin to view, approve, or reject pending visitor requests. 
+4.   Make approved requests visible to Security Staff for gate verification. 
+5.   Allow Security Staff to record visitor entry and exit times and update visitor status (Inside 
+Campus / Exited). 
+6.   Allow Security Staff to register direct (walk-in) visitors and assign permitted date and time. 
+7.   Allow Security Staff to extend the permitted time of a visitor currently inside the campus. 
+8.   Notify Security and Admin (and optionally the visitor) when a visitor's allowed time 
+expires without an exit record. 
+
+--- Page 8 ---
+Page 8 of 17 
+9.   Allow Admin to import group visitor details from Excel or CSV files, review, and approve 
+the group. 
+10.   Allow Students/Faculty to create temporary visitor codes with a defined validity period for 
+regular relatives. 
+11.   Allow Security Staff to verify temporary visitor codes before permitting entry. 
+12.   Provide search and history views of visitor records by name, phone number, date, or status. 
+13.   Provide basic reports and analytics on visitor numbers, entries, exits, and approvals. 
+14.   Allow Admin to manage user accounts and role assignments. 
+2.3 User Characteristics 
+The system is designed for the following primary user types: 
+1.   Student   –   Enrolled student of the institution; expected to have basic computer literacy and 
+familiarity with web applications. 
+2.   Faculty   –   Teaching or research staff; similar computer literacy expectations as students. 
+3.   Admin   –   Authorized administrative staff responsible for visitor request approval, group 
+import, user management, and reporting; expected to have moderate proficiency with office 
+tools (Excel/CSV) and web dashboards. 
+4.   Security Staff   –   Gate personnel responsible for verifying visitors, recording entry/exit, and 
+handling direct registrations; expected to have basic computer literacy sufficient to operate 
+a web-based dashboard at the gate. 
+All users are assumed to be computer-literate enough to use a standard web browser. No 
+specialized technical knowledge (e.g., database administration or programming) is required of end
+users. The interface shall be simple and role-focused so that Security Staff can perform gate
+operations with minimal training. 
+2.4 General Constraints, Assumptions and Dependencies 
+The following constraints, assumptions, and dependencies apply to the LOBBY system: 
+Constraints 
+•   The system requires a working internet or campus network connection. 
+•   Only authorized users with valid credentials may access visitor information. 
+•   Visitor personal information must be protected in accordance with applicable data- 
+protection policies. 
+•   Excel/CSV files for group import must follow the format supported by the application. 
+•   The first version is limited to a single campus. 
+
+--- Page 9 ---
+Page 9 of 17 
+•   Facial recognition, biometric verification, RFID, and automatic gates are outside the 
+current scope. 
+Assumptions 
+•   Students and Faculty will have their own authenticated accounts. 
+•   Admin and Security Staff will have authorized accounts with appropriate privileges. 
+•   Users will enter correct visitor information to the best of their knowledge. 
+•   Student/Faculty requests must be approved by Admin before Security can process them at 
+the gate. 
+•   Security Staff will physically check visitors at the gate. 
+•   Direct visitors can be registered by Security without a prior request. 
+•   Group Excel/CSV files will contain the required fields in the expected format. 
+•   Admin will review imported group details before approval. 
+•   Temporary visitor codes will have a fixed validity period set by the creator. 
+•   Security will record visitor entry and exit in the system. 
+•   Visitor information will be stored in a persistent database. 
+Dependencies 
+•   Availability of a relational DBMS for data storage. 
+•   Availability of email or messaging gateway for optional visitor alerts (if implemented). 
+•   Campus network infrastructure and web server environment. 
+2.5 Apportioning of the Requirements 
+The LOBBY Visitor Management System is planned for implementation in phases: 
+Phase 1   –   Core System (Pilot) 
+Implementation of user authentication, Student/Faculty visitor requests, Admin approval, Security 
+entry/exit recording, direct visitor registration, basic search, and visitor history. Target: single
+campus, limited user base. 
+Phase 2   –   Extended Features 
+Addition of group visitor import (Excel/CSV), temporary visitor codes, time-extension and expiry 
+notifications, role-based dashboards refinements, and basic reports/analytics. 
+Phase 3   –   Future Enhancements (Out of Current Scope) 
+
+--- Page 10 ---
+Page 10 of 17 
+Possible integration with biometric or facial-recognition devices, RFID/automatic gates, multi- 
+campus support, and advanced analytics. These are explicitly outside the scope of the first version. 
+3. Specific Requirements 
+3.1 External Interface Requirements 
+The following external interface requirements apply: 
+•   The product is a web application accessible via standard modern web browsers (Chrome, 
+Firefox, Edge, Safari) on desktop and tablet devices. 
+•   The user interface shall be primarily textual and form-based, with tables for lists of requests 
+and records. Minimal graphics are required beyond standard UI controls and status 
+indicators. 
+•   No   specialized   hardware   (smart-card   readers,   biometric   sensors,   or   dedicated   gate 
+terminals) is required for the first version. 
+•   Sound and animation are not essential; optional browser notifications may be used for real- 
+time alerts. 
+•   The system shall accept Excel (.xlsx) and CSV file uploads for group visitor import. 
+•   Optional integration with email or SMS gateways may be used for visitor time-expiry 
+alerts. 
+3.2 Detailed Description of Functional Requirements 
+Table 3 shows the template used to describe functional requirements for the major modules. 
+Table 3: Template for describing functional requirements 
+Purpose   A description of the functional requirement and its reasons 
+Inputs   What the inputs are; in what form they arrive; from what sources; legal domains of each 
+input 
+Processing   Describes the outcome rather than the implementation; includes validity checks, timing if 
+needed, and handling of unexpected situations 
+Outputs   Form, destination and volume of output; timing; range of parameters; error handling 
+3.2.1 Functional Requirements for Student/Faculty Module 
+Table 4 gives the functional requirements for the Student/Faculty module. 
+Table 4: Functional Requirements for Student/Faculty Module 
+Purpose 
+Enable Students and Faculty to raise visitor requests, select host/department, create 
+temporary codes for regular relatives, track request status, and view previous visitor
+records. 
+
+--- Page 11 ---
+Page 11 of 17 
+Inputs 
+Visitor name, contact number, purpose of visit, host/person or department to be visited, 
+expected date and time; for temporary codes: relative details and validity period. Selection
+via web forms and dropdowns. 
+Processing 
+Validate required fields; create a visitor request with status Pending; store request and 
+associated visitor data; generate temporary code when requested and associate it with the
+relative and validity window; retrieve and display request status and history for the logged-
+in user. 
+Outputs 
+Confirmation of request submission; display of request status (Pending / Approved / 
+Rejected); list of previous visitor records; temporary visitor code (with validity period) for
+sharing with the relative. 
+3.2.2 Functional Requirements for Admin Module 
+Table 5 gives the functional requirements for the Admin module. 
+Table 5: Functional Requirements for Admin Module 
+Purpose 
+Enable Admin to view, approve or reject visitor requests; import and review group 
+visitor lists; search and view visitor activity; manage users and roles; and access
+reports. 
+Inputs   Pending request list; approve/reject action with optional remarks; Excel/CSV file for group 
+import; search criteria (name, phone, date, status); user account data for management. 
+Processing 
+Update request status to Approved or Rejected; on approval, make the request available to 
+Security; parse and validate imported file rows, present for review, and on approval create
+visitor records for Security; enforce role assignments; generate summary statistics for
+reports. 
+Outputs 
+Updated request status visible to the requester and to Security (if approved); confirmation 
+of group import and approval; search result lists; user management confirmation; report
+views (visitor counts, entries, exits, approvals). 
+3.2.3 Functional Requirements for Security Module 
+Table 6 gives the functional requirements for the Security module. 
+Table 6: Functional Requirements for Security Module 
+Purpose 
+Enable Security Staff to view approved requests, verify visitors at the gate, record 
+entry and exit, register direct visitors, assign and extend visiting time, and verify
+temporary visitor codes. 
+Inputs   Approved request identifier or visitor details; entry/exit action; direct visitor details and 
+permitted date/time; extension duration; temporary code value for verification. 
+Processing 
+Match visitor against approved request or temporary code; record entry timestamp and set 
+status to Inside Campus; record exit timestamp and set status to Exited; create new visitor
+record for direct registrations with assigned time window; update allowed end-time on
+extension; flag Time Expired when permitted time ends without exit. 
+
+--- Page 12 ---
+Page 12 of 17 
+Outputs   Updated visitor status and timestamps; confirmation of registration or code validation; list 
+of currently Inside Campus visitors; alerts for time-expired visitors. 
+3.2.4 Functional Requirements for Group Import Module 
+Table 7 gives the functional requirements for the Group Import module. 
+Table 7: Functional Requirements for Group Import Module 
+Purpose 
+Allow Admin to import a large visitor list from an Excel or CSV file, review the 
+details, and approve the group so that Security can process entries without manual
+per-person data entry. 
+Inputs 
+Excel   (.xlsx)   or   CSV   file   containing   required   visitor   fields   (name,   contact, 
+institution/affiliation, etc.) in the expected column format; Admin review and correction
+actions; approval action. 
+Processing 
+Parse the file; validate required columns and basic data constraints; present the list for 
+Admin review and optional correction; on approval, create visitor records linked to the
+group and make them available to Security. 
+Outputs   Parsed list displayed for review; error messages for format or data problems; confirmation 
+of group approval; visitor records visible to Security for gate processing. 
+3.2.5 Functional Requirements for Temporary Visitor Code Module 
+Table 8 gives the functional requirements for the Temporary Visitor Code module. 
+Table 8: Functional Requirements for Temporary Visitor Code Module 
+Purpose 
+Allow Students/Faculty to create a time-bound code for a regular relative so that the 
+relative can visit multiple times during the validity period without re-entering full
+details each day, while Security still records each entry and exit. 
+Inputs   Relative name and contact details; validity start and end dates (or duration); for verification 
+at gate: the code value presented by the visitor. 
+Processing 
+Generate a unique temporary code; associate it with the relative details and validity 
+window; store the code; at gate, look up the code, check that current date is within validity,
+and allow entry recording if valid; reject if expired or invalid. 
+Outputs   Generated code and validity period for the creator to share; at gate: validation result (valid 
+/ invalid / expired) and ability to record entry/exit against the associated visitor record. 
+3.2.6 Visitor Request and Management Flows 
+Student/Faculty Visitor Flow 
+Student/Faculty → Request → Admin → Approval → Security → Entry → Exit 
+Step 1   –   Raise Request: Student/Faculty enters visitor details, purpose, host, date, and 
+expected time. 
+Step 2   –   Admin Checks: Request appears on Admin dashboard. 
+
+--- Page 13 ---
+Page 13 of 17 
+Step 3   –   Approval: Admin approves or rejects. Rejected requests end. Approved requests 
+are sent to Security. 
+Step 4   –   Security Checks: When the visitor reaches the gate, Security verifies approved 
+details. 
+Step 5   –   Entry: Security records entry; status becomes Inside Campus. 
+Step 6   –   Exit: Security records exit; visit is saved in Visitor History. 
+General/Direct Visitor Flow 
+Visitor Arrives → Security Registration → Time Allocation → Entry → Exit/Extension 
+Step 1   –   Visitor Arrives: Visitor comes to the gate without a prior request. 
+Step 2   –   Security Registers: Security enters visitor details into the system. 
+Step 3   –   Time is Assigned: Security assigns permitted date and time. 
+Step 4   –   Entry: Security records entry; status becomes Inside Campus. 
+Step 5   –   Time Expires: When allowed time ends, Security can record exit or extend time. 
+Step 6   –   Exit: After the visitor leaves, Security records exit and the record is saved. 
+Group Visitor Flow 
+Student Group → Excel/CSV → Admin Import → Check → Approval → Security → Entry 
+Step 1   –   Details are Shared: Visiting group sends required details in Excel or CSV. 
+Step 2   –   Admin Imports: Admin uploads the file. 
+Step 3   –   Details are Checked: Admin reviews and corrects as needed. 
+Step 4   –   Group is Approved: Admin approves; list becomes available to Security. 
+Step 5   –   Security Handles Entry: Security uses imported records to verify and record entry. 
+Regular Relative Visitor Flow 
+Student/Faculty → Create Code → Set Valid Period → Relative Uses Code → Security 
+Verification → Entry/Exit 
+Step 1   –   Create Code: Student/Faculty adds relative details and creates a temporary code. 
+Step 2   –   Set Valid Period: Creator selects how long the code remains valid. 
+Step 3   –   Relative Uses Code: Relative presents the same code for visits during the period. 
+Step 4   –   Security Verifies: Security checks code validity before allowing entry. 
+Step 5   –   Entry and Exit: Security records each visit's entry and exit. After expiry, the code 
+cannot be used. 
+3.3 Performance Requirements 
+
+--- Page 14 ---
+Page 14 of 17 
+•   The system shall support concurrent access by multiple users (Students/Faculty, Admin, 
+and Security) without significant degradation under typical campus load. 
+•   Ordinary interactive operations (login, submit request, approve, record entry/exit, search) 
+should complete within a few seconds under normal network conditions. 
+•   Group import of a moderately sized file (e.g., a few hundred rows) should complete within 
+a reasonable time (tens of seconds) including validation. 
+•   The system shall handle only textual and structured form data; large binary media are not 
+required. 
+•   Data consistency for entry/exit timestamps and status transitions shall be maintained under 
+concurrent gate operations. 
+3.4 Logical Database Requirements 
+The system requires a relational database to store the following primary entities and relationships 
+(logical level): 
+•   User   –   account credentials, role (Student/Faculty, Admin, Security), profile information. 
+•   Visitor   –   name, contact details, affiliation (if any), and linkage to requests or direct 
+registrations. 
+•   VisitorRequest   –   requester, visitor details, host/department, purpose, expected date/time, 
+status (Pending, Approved, Rejected). 
+•   VisitRecord   –   actual entry time, exit time, current status (Inside Campus, Exited, Time 
+Expired), permitted time window, linked request or direct registration. 
+•   TemporaryCode   –   code value, associated relative/visitor, creator, validity start and end. 
+•   GroupImport   –   import batch metadata, source file reference, approval status, linked visitor 
+records. 
+•   Notification   –   recipient, type (approval, rejection, time expiry), timestamp, read status. 
+The database shall support querying by name, phone number, date range, and status for search and 
+reporting. Historical visit records shall be retained for audit and history views. 
+
+--- Page 15 ---
+Page 15 of 17 
+3.5 Quality Attributes 
+The product is targeted at Students, Faculty, Admin, and Security Staff. The following quality 
+attributes are required: 
+Usability:   Role-based dashboards shall present only the actions relevant to each role. Forms and 
+lists shall be clear and require minimal training, especially for Security Staff at the gate. 
+Reliability:   Entry/exit and status updates shall be recorded reliably; the system should not lose 
+visitor records under normal operation. 
+Security:   Only authenticated and authorized users may access visitor data. Role-based access 
+control shall prevent Students/Faculty from performing Admin or Security actions, and vice versa. 
+Maintainability:   The design shall allow future addition of notification channels and optional 
+integration points without redesign of core visitor flows. 
+Privacy:   Visitor personal information shall be accessible only to authorized roles and protected 
+according to institutional policy. 
+
+--- Page 16 ---
+Page 16 of 17 
+3.6 Other Requirements 
+Limitations of the first version: 
+•   No facial recognition or biometric verification; identity is checked manually by Security. 
+•   The system can indicate when a visitor's allowed time has expired but cannot physically 
+compel the visitor to leave. 
+•   Group import works only with the supported Excel/CSV format. 
+•   Temporary visitor codes cannot be used after their validity period ends. 
+•   RFID, automatic gates, facial recognition, and biometric verification are outside the current 
+scope. 
+•   No additional mandatory requirements are specified at this time beyond those already 
+stated. 
+
+--- Page 17 ---
+Page 17 of 17 
+4. Change History 
+Table 9: Document Change History 
+Version   Date   Description 
+1.0   August 2026   Initial release based on LOBBY Planning document and IEEE 830- 
+inspired structure. 
+5. Document Approvers 
+SRS for LOBBY   –   Visitor Management System approved by: 
+Harshit Yadav 
+Development Team 
+Date: 31-08-2026 

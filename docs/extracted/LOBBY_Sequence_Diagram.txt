@@ -1,0 +1,72 @@
+Sequence Diagram: Raise Visitor Request, Admin Approval and Gate Entry
+
+Student / Faculty
+
+Admin
+
+Security Staff
+:LOBBY Web UI
+:Auth Service
+:Request Controller
+:Visit Controller
+:Notification Service
+:Database
+Admin and Security Staff log in through the same sequence (messages 1 to 7) before their steps below.
+1: login(email, password)
+2: authenticate(credentials)
+3: fetchUser(email)
+4: user record + role
+5: verifyPasswordHash()
+6: session token, role = Student/Faculty
+7: Student/Faculty dashboard
+8: submitRequest(visitor, host, purpose, date, time)
+9: createRequest(data)
+10: validateRequiredFields()
+11: insert Visitor + VisitorRequest (status = Pending)
+12: request_id
+13: notifyAdmin(newRequest)
+14: new visitor request alert
+15: confirmation (Pending)
+16: request submitted, status = Pending
+17: validation errors
+18: highlight fields to correct
+alt
+[all required fields valid]
+
+[a field is missing or invalid]
+19: openPendingRequests()
+20: getPendingRequests()
+21: select requests where status = Pending
+22: pending list
+23: pending list
+24: request details
+25: decide(request_id, decision, remarks)
+26: updateDecision(request_id, decision, remarks)
+27: update status = Approved, decided_at
+28: notify(Approved)
+29: approval notice
+30: approved visitor available at gate
+31: update status = Rejected, remarks
+32: notify(Rejected)
+33: rejection notice (flow ends here)
+alt
+[decision = Approve]
+
+[decision = Reject]
+34: decision saved
+35: request list refreshed
+36: searchApproved(name or phone)
+37: findApprovedRequest(query)
+38: select request where status = Approved and date = today
+39: request + visitor details
+40: visitor details
+41: details shown for verification
+42: check ID against approved details
+43: recordEntry(request_id)
+44: createVisitRecord(request_id)
+45: insert VisitRecord (entry_time, permitted_end, status = Inside Campus)
+46: visit_id
+47: entry recorded
+48: status = Inside Campus
+opt
+[request is Approved and the visitor arrives at the gate]

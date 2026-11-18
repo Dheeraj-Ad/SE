@@ -1,0 +1,267 @@
+
+--- Page 1 ---
+1 
+Course: Software Engineering
+Phase: Planning Phases
+Assignment Type: Group Project 
+LOBBY   –   Visitor Maintenance System 
+1. Project Title 
+LOBBY   –   Visitor Maintenance System 
+2. Project Description and Problem Statement 
+LOBBY   is a visitor management system for a college or university campus. It is mainly
+used to keep visitor details in one place and make the entry and exit process easier. 
+At present, visitor details may be written in registers or managed through calls and
+messages. This makes it difficult to find old records and to know which visitors are
+currently inside the campus. 
+The system will have separate access for Students/Faculty, Admin, and Security. A
+Student or Faculty member can raise a visitor request. The request goes to Admin for
+approval and, after approval, it is available to Security at the gate. 
+For people who come without a Student/Faculty request, Security can directly enter
+their details and give them a permitted date and time. If they need more time, Security
+can extend it. When a visitor's allowed time expires, Security and Admin will be notified
+if the visitor has not recorded an exit. The visitor will also receive a message or email
+alert.If a large group of students from another college is visiting, entering every
+person's details manually would take a lot of time. The group can instead send its
+details in an Excel or CSV file. Admin can import the file at one time, check the details,
+and approve the group. 
+For relatives of Students/Faculty who visit regularly, entering their details every day is
+also inconvenient. The Student or Faculty member can create a temporary visitor code 
+
+--- Page 2 ---
+2 
+and set how long it should remain valid. The relative can use the code during that
+period, while Security can still record each entry and exit. 
+The main aim is to reduce manual work, keep proper visitor records, and make campus
+visitor management easier. 
+3. Target Users 
+Student/Faculty 
+●   Raise visitor requests. 
+●   Enter visitor details. 
+●   Select the person or department to be visited. 
+●   Select the expected date and time. 
+●   Check request status. 
+●   Create temporary codes for regular relatives. 
+●   View previous visitor records. 
+Admin 
+●   View, approve, or reject visitor requests. 
+●   Import group visitor details from Excel or CSV. 
+●   Check imported details before approval. 
+●   View visitor information and activity. 
+●   Search records and view reports. 
+●   Manage users. 
+Security Staff 
+●   View approved requests. 
+●   Check visitors at the gate. 
+●   Record entry and exit. 
+●   Register direct visitors. 
+●   Assign and extend visiting time. 
+●   Verify temporary visitor codes. 
+●   Search visitor records. 
+
+--- Page 3 ---
+3 
+4. Major Features: 
+1. User Login and Authentication 
+2. Visitor Registration 
+3. Visitor Entry Management 
+4. Visitor Exit Management 
+5. Visitor Record Management 
+6. Host/Person Selection 
+7. Visitor Search 
+8. Visitor Approval 
+9. Role-Based Dashboards 
+10. Notifications 
+11. Reports and Analytics 
+12. Visitor History 
+13. Admin/User Management 
+14. Group Visitor Import 
+15. Temporary Visitor Code 
+5. Core/Essential Features 
+Feature   Description 
+User Login and Authentication   Allows   Students/Faculty,   Admin,   and
+Security   Staff   to   log   in   and   use   the
+features meant for their role. 
+Visitor Registration   Allows Students/Faculty to submit visitor
+details and Security to register direct
+visitors. 
+
+--- Page 4 ---
+4 
+Visitor Entry Management   Allows Security to verify a visitor and
+record the entry time. 
+Visitor Exit Management   Allows Security to record the visitor's exit
+time. 
+Visitor Record Management   Stores   visitor   details,   request   status,
+entry, exit, and allowed time. 
+Host/Person Selection   Allows Students/Faculty to mention the
+person or department to be visited. 
+Visitor Search   Allows authorized users to find records
+using name, phone number, date, or
+status. 
+Visitor Approval   Allows   Admin   to   approve   or   reject
+Student/Faculty requests. 
+Role-Based Dashboards   Provides   separate   dashboards   for
+Students/Faculty, Admin, and Security. 
+Visitor History   Keeps   previous   visitor   and   entry/exit
+records. 
+Admin/User Management   Allows Admin to manage users and roles. 
+Group Visitor Import   Allows Admin to import a large visitor list
+from an Excel or CSV file instead of
+entering every person manually. 
+Temporary Visitor Code   Allows Students/Faculty to create a code
+for a relative for a selected period so the
+details do not need to be entered every
+day. 
+6. Additional/Optional Features 
+Feature   Description 
+Notifications   Informs   users   when   requests   are
+approved or rejected and when approved
+visitors are available for Security. 
+Reports and Analytics   Shows   visitor   numbers,   entries,   exits,
+approvals, and other basic statistics. 
+
+--- Page 5 ---
+5 
+Time Extension   Allows Security to extend the permitted
+time of a visitor. 
+Visitor Status Tracking   Shows   statuses   such   as   Pending,
+Approved, Rejected, Inside Campus, Time
+Expired, and Exited. 
+7. Visitor Request and Management Flow 
+Student/Faculty Visitor Flow 
+Student/Faculty → Request → Admin → Approval → Security → Entry → Exit 
+Step 1   –   Raise Request 
+The Student or Faculty member enters the visitor details, purpose, host, date, and
+expected time. 
+Step 2   –   Admin Checks 
+The request appears in the Admin Dashboard for checking. 
+Step 3   –   Approval 
+Admin approves or rejects the request. A rejected request ends here. An approved
+request is sent to Security. 
+Step 4   –   Security Checks 
+When the visitor reaches the gate, Security checks the approved details. 
+Step 5   –   Entry 
+Security records the entry and the visitor is shown as Inside Campus. 
+Step 6   –   Exit 
+Security records the exit and the visit is saved in Visitor History. 
+General/Direct Visitor Flow 
+Visitor Arrives → Security Registration → Time Allocation → Entry → Exit/Extension 
+Step 1   –   Visitor Arrives 
+
+--- Page 6 ---
+6 
+The visitor comes to the gate without a Student/Faculty request. 
+Step 2   –   Security Registers 
+Security enters the visitor's details into the system. 
+Step 3   –   Time is Assigned 
+Security gives the visitor a permitted date and time. 
+Step 4   –   Entry 
+Security records the entry and the visitor is shown as Inside Campus. 
+Step 5   –   Time Expires 
+When the allowed time ends, Security can record the exit or extend the time. 
+Step 6   –   Exit 
+After the visitor leaves, Security records the exit and the record is saved. 
+Group Visitor Flow 
+Student Group → Excel/CSV → Admin Import → Check → Approval → Security → 
+Entry 
+Step 1   –   Details are Shared 
+The visiting group sends the required student details in an Excel or CSV file. 
+Step 2   –   Admin Imports 
+Admin uploads the file instead of entering every student separately. 
+Step 3   –   Details are Checked 
+Admin checks the imported list and corrects any required information. 
+Step 4   –   Group is Approved 
+Admin approves the group and the list becomes available to Security. 
+Step 5   –   Security Handles Entry 
+
+--- Page 7 ---
+7 
+Security uses the imported records to verify the students and record their entry. 
+Regular Relative Visitor Flow 
+Student/Faculty → Create Code → Set Valid Period → Relative Uses Code → Security
+Verification → Entry/Exit 
+Step 1   –   Create Code 
+The Student or Faculty member adds the relative's details and creates a temporary
+code. 
+Step 2   –   Set Valid Period 
+The Student or Faculty member selects how long the code should work. 
+Step 3   –   Relative Uses Code 
+The relative can use the same code for visits during that period. 
+Step 4   –   Security Verifies 
+Security checks whether the code is valid before allowing entry. 
+Step 5   –   Entry and Exit 
+Security records each visit's entry and exit. After the expiry date, the code cannot be
+used. 
+8. Major Modules/Components 
+Authentication Module 
+Handles login and role-based access. 
+Student/Faculty Module 
+Allows visitor requests, host selection, temporary codes, and request tracking. 
+Admin Module 
+Handles approvals, group imports, visitor records, reports, and user management. 
+Security Module 
+
+--- Page 8 ---
+8 
+Handles gate verification, direct registration, entry, exit, time extension, and code
+verification. 
+Visitor Registration Module 
+Stores details from Student/Faculty requests and direct registrations. 
+Visitor Approval Module 
+Manages approval before an approved request reaches Security. 
+Group Import Module 
+Allows Admin to upload Excel or CSV files for large groups. 
+Temporary Visitor Code Module 
+Creates and checks codes for regular visitors such as relatives. 
+Entry and Exit Module 
+Stores actual entry and exit times. 
+Visitor Records and History Module 
+Keeps previous visitor information and visit history. 
+Notification Module 
+Handles request and approval notifications. 
+Reports and Analytics Module 
+Provides basic visitor statistics. 
+User Management Module 
+Allows Admin to manage accounts and roles. 
+9. Assumptions 
+●   Students and Faculty will have their own accounts. 
+●   Admin and Security Staff will have authorized accounts. 
+●   Users will enter correct visitor information. 
+
+--- Page 9 ---
+9 
+●   Student/Faculty requests must be approved by Admin before Security can process 
+them. 
+●   Security will check visitors at the gate. 
+●   Direct visitors can be registered by Security. 
+●   Group Excel/CSV files will contain the required information in the expected format. 
+●   Admin will check imported group details before approval. 
+●   Temporary visitor codes will have a fixed validity period. 
+●   Security will record visitor entry and exit. 
+●   Visitor information will be stored in a database. 
+●   The system will have network access. 
+10. Constraints 
+●   The system requires an internet or campus network connection. 
+●   Only authorized users should access visitor information. 
+●   The system depends on users entering correct details. 
+●   Excel/CSV files must follow the format supported by the application. 
+●   Visitor personal information must be protected. 
+●   Security will need to verify visitors at the gate. 
+●   The first version may be limited to one campus. 
+11. Limitations 
+●   The first version will not include facial recognition or biometric verification. 
+●   Visitor identity will mainly be checked manually by Security. 
+●   Direct visitors will need to be registered by Security. 
+●   The system can show when a visitor's allowed time has expired, but it cannot 
+physically make the visitor leave. 
+●   Group import will work only with a supported Excel/CSV format. 
+●   Temporary visitor codes cannot be used after their validity period ends. 
+●   RFID, automatic gates, facial recognition, and biometric verification are outside the 
+current scope. 
+
+--- Page 10 ---
+10 
+Screenshots of Planning: 
+
+--- Page 11 ---
+11 

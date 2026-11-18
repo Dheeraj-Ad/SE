@@ -1,0 +1,82 @@
+Sequence Diagram: Raise Visitor Request, Approval, Gate Entry and Exit
+
+Student / Faculty
+
+Admin
+
+Security Staff
+:LOBBY Web App
+:LOBBY Server
+:Database
+Phase 1: Student / Faculty raises a visitor request
+Phase 2: Admin reviews the request
+Phase 3: Security admits the approved visitor at the gate
+Phase 4: Security records the exit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Precondition: all three users are already logged in (Login / Authenticate use case).
+1: open 'Make a Request' form
+2: show form: name, phone, relation,<br>ID proof, date and time, purpose, host
+3: fill details, click Submit
+4: confirm pop-up 'Are you sure?' : Yes
+5: POST /requests<br>(visitor, host, purpose, date, time)
+6: validate required fields and role
+7: INSERT Visitor,<br>VisitorRequest (Pending)
+8: request_id
+9: create notification for Admin
+10: 201 Created (request_id, Pending)
+11: 'Request submitted', status = Pending
+12: open 'New Requests'
+13: GET /requests?status=Pending
+14: SELECT pending requests
+15: pending list
+16: pending list
+17: show requests: visitor, host, purpose, time
+18: click Approve or Reject (+ remarks)
+19: PATCH /requests/{id}<br>(decision, remarks)
+20: UPDATE status = Approved
+21: updated
+22: notify requester and Security
+23: UPDATE status = Rejected,<br>remarks
+24: updated
+25: notify requester (flow ends)
+alt
+[decision = Approve]
+
+[decision = Reject]
+26: decision saved
+27: request list refreshed
+28: search visitor (name or phone)
+29: GET /requests?status=Approved<br>&date=today&q=name
+30: SELECT approved request
+31: visitor + request details
+32: visitor details
+33: show visitor details and permitted time
+34: check visitor's ID proof
+35: click 'Record Entry'
+36: POST /visits (request_id)
+37: INSERT VisitRecord (entry_time,<br>permitted_end, Inside Campus)
+38: visit_id
+39: entry recorded
+40: visitor listed in Live Count as Inside Campus
+41: click 'Exit' for the visitor
+42: PATCH /visits/{id} (exit)
+43: UPDATE exit_time,<br>status = Exited
+44: updated
+45: exit recorded
+46: visit saved to Visitor History

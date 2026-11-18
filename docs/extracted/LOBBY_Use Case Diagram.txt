@@ -1,0 +1,51 @@
+
+Raise Visitor Request
+Select Host / Dept.
+Import Group Visitors
+Review Imported Details
+Register Direct Visitor
+Assign Visiting Time
+Create Temporary Code
+Set Validity Period
+Login / Authenticate
+
+Approve / Reject Request
+Manage Users &amp; Roles
+Record Entry
+Extend Visiting Time
+
+View Request Status
+View Visitor History
+
+Reports &amp; Analytics
+Search Visitor Records
+
+Verify Temporary Code
+Record Exit
+Notify Overdue Visitor
+
+
+
+
+
+
+
+
+
+
+
+
+Studend/Faculty
+Admin
+Security/Staff
+
+
+
+&lt;&lt;extend&gt;&gt;
+&lt;&lt;extend&gt;&gt;
+&lt;&lt;include&gt;&gt;
+&lt;&lt;extend&gt;&gt;
+&lt;&lt;include&gt;&gt;
+&lt;&lt;include&gt;&gt;
+&lt;&lt;include&gt;&gt;
+<font style="font-size: 24px;">System Boundary</font>

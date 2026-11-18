@@ -1,0 +1,245 @@
+
+--- Page 1 ---
+Page 1 of 4 
+MoSCoW Requirement Prioritization Report 
+LOBBY   –   Visitor Management System 
+Dheeraj Bommakanti - 240439 
+Sri Surya   –   240495 
+Harshit Yadav   –   240471 
+Sri Charan - 240660 
+Question 1: Identification of Requirements 
+Twenty requirements were identified for the LOBBY Visitor Management System, grouped below under
+Functional, Non-Functional, User/Stakeholder, and System requirements. 
+1.1 Functional Requirements 
+•   R2:   Student/Faculty can raise a visitor request with visitor details, purpose, host, date and expected
+time 
+•   R3:   Admin can view, approve, or reject pending visitor requests 
+•   R4:   Security Staff can record visitor entry and exit times and update status (Inside Campus /
+Exited) 
+•   R5:   Security Staff can register direct (walk-in) visitors and assign permitted date and time 
+•   R7:   Authorized users can search visitor records by name, phone number, date or status 
+•   R11:   Admin can import group visitor details from Excel or CSV, review and approve the group 
+•   R12:   Admin can create temporary visitor codes for faculty with regular entry/exit needs 
+•   R13:   Security Staff can verify temporary visitor codes before allowing entry 
+•   R14:   Security Staff can extend the permitted visiting time of a visitor currently inside campus 
+•   R17:   System provides basic reports and analytics (visitor counts, entries, exits, approvals) 
+•   R18:   Visitor receives a message or email alert when allowed time is about to expire or has expired 
+1.2 Non-Functional Requirements 
+•   R9:   System protects visitor personal information and allows access only to authorized roles 
+•   R10:   System requires campus network or internet connectivity for operation 
+•   R15:   System notifies Security and Admin when a visitor's allowed time expires without exit 
+1.3 User / Stakeholder Requirements 
+•   R1:   User login and role-based authentication for Student/Faculty, Admin, and Security Staff 
+•   R8:   Role-based dashboards for Student/Faculty, Admin and Security Staff 
+•   R16:   Admin can manage user accounts and role assignments 
+
+--- Page 2 ---
+Page 2 of 4 
+1.4 System Requirements 
+•   The system shall store all visitor details, request status, entry/exit timestamps, temporary codes
+and related data in a centralized persistent database. 
+•   The system shall operate as a web-based application requiring campus network or internet
+connectivity. 
+Question 2: MoSCoW Prioritization 
+Each   requirement   identified   in   Question   1   was   prioritized   using   the   MoSCoW   technique.   The
+requirements are grouped below by priority; a one-line justification for each is provided in the table under
+Question 3. 
+2.1 Must Have (10 requirements) 
+●   R1:   User login and role-based authentication for Student/Faculty, Admin, and Security Staff 
+●   R2:   Student/Faculty can raise a visitor request with visitor details, purpose, host, date and expected
+time 
+●   R3:   Admin can view, approve, or reject pending visitor requests 
+●   R4:   Security Staff can record visitor entry and exit times and update status (Inside Campus /
+Exited) 
+●   R5:   Security Staff can register direct (walk-in) visitors and assign permitted date and time 
+●   R6:   System stores visitor details, request status, entry/exit timestamps and allowed time in a
+database 
+●   R7:   Authorized users can search visitor records by name, phone number, date or status 
+●   R8:   Role-based dashboards for Student/Faculty, Admin and Security Staff 
+●   R9:   System protects visitor personal information and allows access only to authorized roles 
+●   R10:   System requires campus network or internet connectivity for operation 
+2.2 Should Have (6 requirements) 
+●   R11:   Admin can import group visitor details from Excel or CSV, review and approve the group 
+●   R12:   Admin can create temporary visitor codes for faculty with regular entry/exit needs 
+●   R13:   Security Staff can verify temporary visitor codes before allowing entry 
+●   R14:   Security Staff can extend the permitted visiting time of a visitor currently inside campus 
+●   R15:   System notifies Security and Admin when a visitor's allowed time expires without exit 
+●   R16:   Admin can manage user accounts and role assignments 
+2.3 Could Have (2 requirements) 
+●   R17:   System provides basic reports and analytics (visitor counts, entries, exits, approvals) 
+●   R18:   Visitor receives a message or email alert when allowed time is about to expire or has expired 
+2.4 Won't Have (2 requirements) 
+●   R19:   System supports facial recognition or biometric verification of visitors 
+●   R20:   System integrates with RFID or automatic gate barriers 
+
+--- Page 3 ---
+Page 3 of 4 
+Question 3: Priority Table with Justification 
+The following table lists twenty requirements with their type, MoSCoW priority and justification. Priority 
+colour coding: Must Have (green), Should Have (yellow), Could Have (blue), Won’t Have (red). 
+Req.
+ID   Requirement   Type   Priority   Justification 
+R1 
+User login and role-based authentication
+for Student/Faculty, Admin, and Security
+Staff 
+Functional   /
+System   Must Have 
+Essential to restrict access
+and   enforce   role-based
+privileges 
+R2 
+Student/Faculty can raise a visitor request
+with visitor details, purpose, host, date
+and expected time 
+Functional   /
+User   Must Have 
+Core entry point for planned
+visitor   management
+workflow 
+R3   Admin   can   view,   approve,   or   reject
+pending visitor requests 
+Functional   /
+Stakeholder   Must Have 
+Approval gate is mandatory
+before Security can process
+a request 
+R4 
+Security Staff can record visitor entry and
+exit   times   and   update   status   (Inside
+Campus / Exited) 
+Functional   Must Have   Fundamental   for   tracking
+who is currently on campus 
+R5 
+Security Staff can register direct (walk-in)
+visitors and assign permitted date and
+time 
+Functional   Must Have 
+Required to handle visitors
+who arrive without a prior
+request 
+R6 
+System   stores   visitor   details,   request
+status, entry/exit timestamps and allowed
+time in a database 
+System   Must Have 
+Persistent   storage   is
+essential for records, search
+and history 
+R7 
+Authorized   users   can   search   visitor
+records by name, phone number, date or
+status 
+Functional   Must Have 
+Needed   to   locate   records
+quickly at the gate and for
+administration 
+R8 
+Role-based   dashboards   for
+Student/Faculty,   Admin   and   Security
+Staff 
+Functional   /
+User   Must Have   Ensures each role sees only
+relevant actions and data 
+R9 
+System   protects   visitor   personal
+information and allows access only to
+authorized roles 
+Non-functional /
+System   Must Have 
+Privacy   and   security   are
+mandatory   for   personal
+visitor data 
+R10   System   requires   campus   network   or
+internet connectivity for operation 
+System   /   Non-
+functional   Must Have 
+Web-based   application
+depends   on   network
+availability 
+R11 
+Admin can import group visitor details
+from Excel or CSV, review and approve
+the group 
+Functional   /
+Stakeholder   Should Have 
+Important for large external
+groups;   avoids   lengthy
+manual entry 
+R12   Admin can create temporary visitor codes
+for faculty with regular entry/exit needs. 
+Functional   /
+User   Should Have 
+Reduces repeated data entry
+for frequent visitors; high
+practical value 
+R13   Security Staff can verify temporary visitor
+codes before allowing entry   Functional   Should Have   Completes   the   temporary-
+code   workflow   and   is 
+
+--- Page 4 ---
+Page 4 of 4 
+needed   if   codes   are
+supported 
+R14 
+Security Staff can extend the permitted
+visiting time of a visitor currently inside
+campus 
+Functional   Should Have 
+Common operational need
+when visits run longer than
+planned 
+R15 
+System notifies Security and Admin when 
+a visitor’s allowed time expires without 
+exit 
+Functional   Should Have 
+Improves   safety   and
+accountability for overdue
+visitors 
+R16   Admin can manage user accounts and role
+assignments 
+Functional   /
+Stakeholder   Should Have 
+Needed   for   ongoing
+administration of who can
+access the system 
+R17 
+System   provides   basic   reports   and
+analytics (visitor counts, entries, exits,
+approvals) 
+Functional   /
+Stakeholder   Could Have 
+Useful   for   management
+insight but not required for
+core operations 
+R18 
+Visitor receives a message or email alert
+when allowed time is about to expire or
+has expired 
+Functional   /
+User   Could Have 
+Desirable   convenience
+feature;   depends   on
+messaging gateway 
+R19   System   supports   facial   recognition   or
+biometric verification of visitors 
+Functional   /
+System   Won’t Have 
+Explicitly out of scope for
+the   first   version;   manual
+verification only 
+R20   System integrates with RFID or automatic
+gate barriers   System   Won’t Have 
+Planned   for   a   possible
+future phase; not in current
+scope 
+Summary of Prioritization 
+The prioritization reflects the project goal of delivering a usable visitor management system for a single
+campus in the first version, while deferring advanced identity and gate-automation features. 
+Legend   –   Priority Colour Coding 
+Must Have   Essential for the first release 
+Should Have   Important;   include   if   possible   after   Must
+Haves 
+Could Have   Desirable; optional if time is limited 
+Won’t Have   Out of scope for the current version 

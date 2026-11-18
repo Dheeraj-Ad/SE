@@ -1,0 +1,30 @@
+State Transition Diagram: Visitor Visit (VisitorRequest + VisitRecord)
+
+
+<b>Rejected</b><hr style='border:none;border-top:1px solid #000;margin:4px -6px'><div style='text-align:left;font-size:11px'>entry / store Admin remarks</div>
+<b>Pending</b><hr style='border:none;border-top:1px solid #000;margin:4px -6px'><div style='text-align:left;font-size:11px'>entry / notify Admin</div>
+<b>Approved</b>
+<b>Lapsed (no-show)</b>
+<b>Inside Campus</b><hr style='border:none;border-top:1px solid #000;margin:4px -6px'><div style='text-align:left;font-size:11px'>Security extends time /<br>&nbsp;&nbsp;update permitted_end</div>
+<b>Time Expired</b><hr style='border:none;border-top:1px solid #000;margin:4px -6px'><div style='text-align:left;font-size:11px'>entry / alert Security, Admin, visitor<br>after(1 hour) / escalation email to Admin</div>
+<b>Exited</b><hr style='border:none;border-top:1px solid #000;margin:4px -6px'><div style='text-align:left;font-size:11px'>entry / set exit_time,<br>&nbsp;&nbsp;save to Visitor History</div>
+
+
+
+visit<br>created
+[type = Student / Faculty request]
+[type = group import]
+[type = temporary code and code valid] /<br>set entry_time
+[type = direct walk-in] /<br>assign permitted time, set entry_time
+Admin approves /<br>notify requester and Security
+Admin rejects /<br>notify requester
+
+when(expected date has passed)
+
+Security records entry<br>[ID verified and date = expected date] /<br>set entry_time
+when(now &ge; permitted_end)
+Security extends time /<br>set new permitted_end
+Security records exit
+Security records exit /<br>flag as late exit
+
+<b>Notation</b> (UML state machine)<br>Rounded box = state (lower part lists internal activities) &nbsp;|&nbsp; â— initial state &nbsp;|&nbsp; â—‰ final state &nbsp;|&nbsp; â—‡ choice pseudostate<br>Transition label: <i>event [guard] / action</i> &nbsp;|&nbsp; when(...) = change event &nbsp;|&nbsp; after(...) = time event &nbsp;|&nbsp; entry / ... = entry action

@@ -1,0 +1,40 @@
+
+--- Page 1 ---
+LOBBY – Visitor Management System 
+Coding Module Test Cases 
+R2: Student/Faculty can raise a visitor request 
+Test Case ID   Test Case Description   Input   Expected Output 
+R2-TC01   Raise request with valid details   Visitor name, phone, purpose, host, 
+date, expected time 
+Request is submitted with status 
+"Pending" 
+R2-TC02   Raise request with empty mandatory 
+fields 
+Name and phone left blank   Validation message is displayed 
+R2-TC03   Raise request with a past date   Entry date earlier than today   Error message is displayed 
+R2-TC04   Raise request with invalid phone 
+number 
+Phone = "abc123"   Error message: invalid phone number 
+R3: Admin can view, approve or reject requests 
+Test Case ID   Test Case Description   Input   Expected Output 
+R3-TC01   View pending requests   Admin opens the requests page   All pending requests are listed 
+R3-TC02   Approve a pending request   Click "Approve"   Status changes to "Approved" and the 
+request is visible to Security 
+R3-TC03   Reject a pending request   Click "Reject"   Status changes to "Rejected" and the 
+request is not sent to Security 
+R3-TC04   Open the requests page when none 
+are pending 
+No pending requests in the system   "No pending requests" message is 
+displayed 
+R18: Visitor receives alert when allowed time is about to expire 
+Test Case ID   Test Case Description   Input   Expected Output 
+R18-TC01   Alert before expiry   Visitor inside campus, allowed time 
+about to end 
+Visitor receives a message or email alert 
+R18-TC02   Alert after expiry   Allowed time has passed, no exit 
+recorded 
+Visitor receives an expired-time alert 
+R18-TC03   No alert after exit   Visitor exits before allowed time ends   No alert is sent 
+R18-TC04   No duplicate alert for the same visit   Visitor already alerted once, system 
+checks again before expiry 
+Only one alert is sent per visit 

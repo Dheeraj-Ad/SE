@@ -1,0 +1,22 @@
+
+--- Page 1 ---
+LOBBY – Visitor Management System 
+Coding Module Test Cases 
+R7: Authorized users can search visitor records by name, phone number, date and time 
+Test Case ID   Test Case Description   Input   Expected Output 
+R7-TC01   Search by name   Existing visitor name   Matching record is displayed 
+R7-TC02   Search by phone number   Existing phone number   Matching record is displayed 
+R7-TC03   Search by date and time   Date and time range containing visits   Records within that range are displayed 
+R7-TC04   Search with no matching record   Name that does not exist   "No records found" message is displayed 
+R17: System provides basic reports and analytics 
+Test Case ID   Test Case Description   Input   Expected Output 
+R17-TC01   Generate report with available data   Date range with existing visits   Visitor counts, entries, exits and approvals 
+are shown correctly 
+R17-TC02   Generate report with no data   Date range with no visits   Zero counts or "No data available" 
+message is displayed 
+R17-TC03   Generate report with an invalid date 
+range 
+From date later than To date   Error message is displayed 
+R17-TC04   Verify report counts against records   Compare report totals with the actual 
+records 
+Report numbers match the stored data 

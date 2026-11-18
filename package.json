@@ -1,0 +1,27 @@
+{
+  "name": "lobby-visitor-management",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Single-campus visitor management with role-based workflows and traceable acceptance tests",
+  "engines": {"node": ">=24.0.0"},
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server/index.js",
+    "dev": "node --env-file-if-exists=.env --watch server/index.js",
+    "setup": "node --env-file-if-exists=.env scripts/setup.js",
+    "test": "node --test --test-concurrency=1 tests/**/*.test.js",
+    "test:e2e": "playwright test",
+    "check": "node scripts/check.js",
+    "backup": "node --env-file-if-exists=.env scripts/backup.js"
+  },
+  "dependencies": {
+    "csv-parse": "^7.0.3",
+    "exceljs": "^4.4.0",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "multer": "^2.0.2",
+    "nodemailer": "^10.2.1"
+  },
+  "overrides": { "exceljs": { "uuid": "^11.1.1" } },
+  "devDependencies": {"@playwright/test": "^1.56.1", "supertest": "^7.1.4"}
+}

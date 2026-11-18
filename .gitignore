@@ -1,0 +1,9 @@
+node_modules/
+tools/node_modules/
+.npm-cache/
+.env
+data/
+backups/
+test-results/
+playwright-report/
+*.log

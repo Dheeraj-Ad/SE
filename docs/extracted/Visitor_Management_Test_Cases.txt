@@ -1,0 +1,92 @@
+Dheeraj Bommakanti – 240439, CSE-3
+
+Module: Security Gate Operations
+
+R4: Record Visitor Entry, Exit and Update Status
+Test Case ID
+Test Case Description
+Input
+Expected Output
+TC01
+Record entry of an approved visitor
+Valid approved visitor ID
+Entry time recorded and status updated to "Inside"
+TC02
+Attempt entry of an unapproved visitor
+Visitor ID with pending/rejected approval
+Entry denied with error message
+TC03
+Record exit of a visitor
+Valid visitor ID currently inside
+Exit time recorded and status updated to "Exited"
+TC04
+Attempt exit without entry
+Visitor ID with no entry record
+Error message displayed
+TC05
+Attempt duplicate visitor entry
+Visitor ID already marked "Inside"
+Duplicate entry prevented
+TC06
+Record exit after permitted time
+Visitor exits after allowed time
+Exit recorded and overstay flagged
+R5: Register Direct Visitor and Assign Permitted Date & Time
+Test Case ID
+Test Case Description
+Input
+Expected Output
+TC07
+Register visitor with valid details
+Valid name, phone number, host, date and time
+Visitor registered successfully
+TC08
+Register visitor with missing mandatory details
+Empty visitor name or required field
+Validation error displayed
+TC09
+Register visitor with invalid phone number
+Invalid phone number format
+Invalid phone number error
+TC10
+Assign valid permitted visiting time
+Start 10:00 AM, end 12:00 PM
+Visiting time assigned successfully
+TC11
+Assign invalid visiting time
+Start 3:00 PM, end 2:00 PM
+Error: End time must be after start time
+TC12
+Register visitor with past permitted date
+Date earlier than current date
+Registration rejected with validation message
+R14: Extend Permitted Visiting Time
+Test Case ID
+Test Case Description
+Input
+Expected Output
+TC13
+Extend visiting time successfully
+Existing end 4:00 PM, new end 5:00 PM
+Permitted end time updated to 5:00 PM
+TC14
+Attempt to reduce permitted time through extension
+Existing end 5:00 PM, new end 4:00 PM
+Extension rejected
+TC15
+Extend time for invalid visitor
+Visitor ID not found
+Error: Visitor not found
+TC16
+Extend time for already exited visitor
+Visitor status "Exited"
+Extension denied
+TC17
+Extend visiting time multiple times
+4:00 PM → 5:00 PM → 6:00 PM
+Final permitted end time updated to 6:00 PM
+TC18
+Extend visiting time with empty input
+New end time left blank
+Validation error displayed
+

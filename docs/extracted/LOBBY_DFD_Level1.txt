@@ -1,0 +1,56 @@
+Level 1 DFD: LOBBY Visitor Management System
+<b>1.0</b><br>Authenticate<br>User
+<b>2.0</b><br>Manage Visitor<br>Requests
+<b>3.0</b><br>Approve / Reject<br>Requests
+<b>4.0</b><br>Import Group<br>Visitors
+<b>5.0</b><br>Manage Temporary<br>Codes
+<b>6.0</b><br>Control Gate<br>Entry and Exit
+<b>7.0</b><br>Monitor Visit Time<br>and Notify
+<b>8.0</b><br>Search, History<br>and Reports
+<b>D1</b>&nbsp;&nbsp;&nbsp;Users
+<b>D2</b>&nbsp;&nbsp;&nbsp;Visitors
+<b>D3</b>&nbsp;&nbsp;&nbsp;Visitor Requests
+<b>D4</b>&nbsp;&nbsp;&nbsp;Group Imports
+<b>D5</b>&nbsp;&nbsp;&nbsp;Temporary Codes
+<b>D6</b>&nbsp;&nbsp;&nbsp;Visit Records
+<b>D7</b>&nbsp;&nbsp;&nbsp;Notifications
+Student / Faculty
+Admin
+Security Staff
+Email / SMS Gateway
+Security Staff*
+Admin*
+Student / Faculty*
+Security Staff*
+login credentials /<br>session + role
+credentials, user and role data /<br>session + role
+login credentials /<br>session + role
+user credentials<br>and roles
+visitor request details /<br>request status + decision
+visitor details
+new request (Pending) /<br>status
+pending request list /<br>approve or reject + remarks
+pending requests /<br>Approved or Rejected
+decision event
+Excel / CSV file, corrections, approval /<br>parsed list + row errors
+import batch<br>+ row status
+group visitor<br>records
+relative details + validity period /<br>temporary visitor code
+code record
+code + validity<br>window
+approved<br>requests
+visitor lookup /<br>direct registration
+entry, exit, extension /<br>current status
+visitor ID, code, direct visitor details,<br>entry / exit, extension /<br>verification result, inside-campus list
+permitted end time /<br>Time Expired flag
+notification<br>log
+time-expiry and<br>escalation alerts
+approved visitor and<br>time-expiry alerts
+visitor alert /<br>delivery status
+visitor<br>data
+request<br>data
+visit<br>history
+report criteria /<br>reports
+history query /<br>visitor history
+search query /<br>results
+<b>Notation</b> (Yourdon / DeMarco)<br>Circle = process &nbsp;|&nbsp; Rectangle = external entity &nbsp;|&nbsp; Open box = data store<br>Two-headed arrow = request and its response (label: in / out)<br>* Entity drawn twice to avoid crossing lines

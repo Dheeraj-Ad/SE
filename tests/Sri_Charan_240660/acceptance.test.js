@@ -1,0 +1,21 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {fixture,valid,inside} from '../helpers.js';
+import {createRequest,decide} from '../../server/modules/Sri_Charan_240660/requests.js';
+import {checkTime,dispatchMail} from '../../server/modules/Sri_Charan_240660/notifications.js';
+import {records} from '../../server/modules/Sri_Surya_240495/records.js';
+import {exitVisit} from '../../server/modules/Dheeraj_Bommakanti_240439/gate.js';
+import {one} from '../../server/shared/database.js';
+
+test('R2-TC01 valid visitor request is Pending',t=>{const f=fixture(t);const r=createRequest(f.ctx,f.users.student,valid());assert.equal(r.status,'Pending');assert.equal(one(f.ctx.db,'SELECT count(*) AS n FROM visitors').n,1);});
+test('R2-TC02 empty mandatory fields are rejected',t=>{const f=fixture(t);for(const key of ['name','phone','purpose','host','starts_at','ends_at'])assert.throws(()=>createRequest(f.ctx,f.users.student,valid({[key]:''})));assert.equal(one(f.ctx.db,'SELECT count(*) AS n FROM requests').n,0);});
+test('R2-TC03 past date is rejected',t=>{const f=fixture(t);assert.throws(()=>createRequest(f.ctx,f.users.faculty,valid({starts_at:'2026-10-26T04:00:00Z',ends_at:'2026-10-26T06:00:00Z'})),/past/);});
+test('R2-TC04 invalid phone is rejected',t=>{const f=fixture(t);assert.throws(()=>createRequest(f.ctx,f.users.student,valid({phone:'abc123'})),/Invalid phone/);});
+test('R3-TC01 admin sees all pending requests',t=>{const f=fixture(t);createRequest(f.ctx,f.users.student,valid());createRequest(f.ctx,f.users.faculty,valid({name:'Second Visitor'}));assert.equal(records(f.ctx,f.users.admin,{status:'Pending'}).total,2);});
+test('R3-TC02 approval makes request visible to Security',t=>{const f=fixture(t);const r=createRequest(f.ctx,f.users.student,valid());assert.equal(records(f.ctx,f.users.security).total,0);decide(f.ctx,f.users.admin,r.id,{decision:'Approved'});assert.equal(records(f.ctx,f.users.security).rows[0].status,'Approved');});
+test('R3-TC03 rejected request is not visible to Security',t=>{const f=fixture(t);const r=createRequest(f.ctx,f.users.student,valid());decide(f.ctx,f.users.admin,r.id,{decision:'Rejected',remarks:'Host unavailable'});assert.equal(records(f.ctx,f.users.security).total,0);assert.equal(records(f.ctx,f.users.student).rows[0].status,'Rejected');});
+test('R3-TC04 no pending requests returns empty result for empty-state UI',t=>{const f=fixture(t);assert.deepEqual(records(f.ctx,f.users.admin,{status:'Pending'}).rows,[]);});
+test('R18-TC01 alert before expiry is delivered through the mail adapter',async t=>{const f=fixture(t);inside(f);f.setTime('2026-10-27T06:20:00Z');checkTime(f.ctx);await dispatchMail(f.ctx);assert.equal(f.delivered.length,1);assert.equal(f.delivered[0].recipient,'asha@example.com');assert.match(f.delivered[0].subject,/ends soon/);});
+test('R18-TC02 expired visitor receives expiry alert',async t=>{const f=fixture(t);inside(f);f.setTime('2026-10-27T06:31:00Z');checkTime(f.ctx);await dispatchMail(f.ctx);assert.match(f.delivered[0].subject,/expired/);assert.equal(records(f.ctx,f.users.security).rows[0].visit_status,'Time Expired');});
+test('R18-TC03 no alerts are sent after visitor exit',async t=>{const f=fixture(t);const v=inside(f);exitVisit(f.ctx,f.users.security,v.id);f.setTime('2026-10-27T07:30:00Z');checkTime(f.ctx);await dispatchMail(f.ctx);assert.equal(f.delivered.length,0);});
+test('R18-TC04 repeated checks do not duplicate a reminder',async t=>{const f=fixture(t);inside(f);f.setTime('2026-10-27T06:20:00Z');checkTime(f.ctx);checkTime(f.ctx);await dispatchMail(f.ctx);checkTime(f.ctx);await dispatchMail(f.ctx);assert.equal(f.delivered.length,1);});

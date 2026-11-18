@@ -1,0 +1,14 @@
+Context Diagram (Level 0 DFD): LOBBY Visitor Management System
+<b>0</b><br><br><b>LOBBY</b><br>Visitor Management<br>System
+Student / Faculty
+Admin
+Security Staff
+Email / SMS Gateway
+Login credentials<br>Visitor request details<br>(visitor, host, purpose, date, time)<br>Relative details + validity period<br>History / status query
+Request status<br>Approval / rejection notice<br>Temporary visitor code<br>Visitor history
+Login credentials<br>Approve / reject decision + remarks<br>Group Excel / CSV file + corrections<br>User account and role data<br>Search / report criteria
+Pending visitor requests<br>Parsed group list + row errors<br>Visitor records and reports<br>Time-expiry alerts
+Login credentials<br>Request / code lookup<br>Direct visitor details<br>+ permitted time<br>Entry / exit actions<br>Time extension
+Approved visitor details<br>Code validation result<br>Inside-campus list<br>Time-expiry alerts
+Visitor time-expiry<br>alert (email / SMS)
+Delivery status

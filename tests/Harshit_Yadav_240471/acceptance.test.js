@@ -1,0 +1,20 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {fixture,valid,upload,groupCsv} from '../helpers.js';
+import {importGroup,approveGroup} from '../../server/modules/Harshit_Yadav_240471/imports.js';
+import {createCode,verifyCode} from '../../server/modules/Harshit_Yadav_240471/codes.js';
+import {records} from '../../server/modules/Sri_Surya_240495/records.js';
+import {one} from '../../server/shared/database.js';
+
+test('R11-TC01 valid CSV is imported for admin review',async t=>{const f=fixture(t);const g=await importGroup(f.ctx,f.users.admin,upload(groupCsv()),'College tour');assert.equal(g.status,'Review');assert.equal(g.rows.length,1);assert.deepEqual(g.rows[0].errors,[]);assert.equal(records(f.ctx,f.users.security).total,0);});
+test('R11-TC02 unsupported import formats are rejected',async t=>{const f=fixture(t);for(const name of ['visitors.pdf','visitors.txt'])await assert.rejects(importGroup(f.ctx,f.users.admin,upload('content',name),'Group'),/Unsupported format/);});
+test('R11-TC03 missing phone column rejects entire import',async t=>{const f=fixture(t);await assert.rejects(importGroup(f.ctx,f.users.admin,upload('name,host\nAsha,Faculty'),'Group'),/Missing required columns: phone/);assert.equal(one(f.ctx.db,'SELECT count(*) AS n FROM groups').n,0);});
+test('R11-TC04 approval exposes complete group to Security',async t=>{const f=fixture(t);const g=await importGroup(f.ctx,f.users.admin,upload(groupCsv()),'Tour');const result=approveGroup(f.ctx,f.users.admin,g.id);assert.equal(result.status,'Approved');assert.equal(records(f.ctx,f.users.security).total,1);});
+test('R12-TC01 valid temporary code is generated and stored',t=>{const f=fixture(t);const c=createCode(f.ctx,f.users.admin,valid());assert.match(c.code,/^[A-F0-9]{16}$/);assert.equal(one(f.ctx.db,'SELECT code FROM codes WHERE id=?',c.id).code,c.code);});
+test('R12-TC02 code end before start is rejected',t=>{const f=fixture(t);assert.throws(()=>createCode(f.ctx,f.users.admin,valid({ends_at:'2026-10-27T03:00:00Z'})),/after start/);});
+test('R12-TC03 empty faculty or mandatory details are rejected',t=>{const f=fixture(t);assert.throws(()=>createCode(f.ctx,f.users.admin,valid({host:''})),/Host/);assert.throws(()=>createCode(f.ctx,f.users.admin,valid({name:''})),/Visitor name/);});
+test('R12-TC04 generated codes are unique',t=>{const f=fixture(t);const a=createCode(f.ctx,f.users.admin,valid()),b=createCode(f.ctx,f.users.admin,valid());assert.notEqual(a.code,b.code);});
+test('R13-TC01 active code shows visitor details and permits entry workflow',t=>{const f=fixture(t);const c=createCode(f.ctx,f.users.admin,valid());const result=verifyCode(f.ctx,f.users.security,c.code);assert.equal(result.name,'Asha Visitor');assert.equal(result.phone,'9876543210');});
+test('R13-TC02 expired code is rejected',t=>{const f=fixture(t);const c=createCode(f.ctx,f.users.admin,valid());f.setTime('2026-10-27T07:00:00Z');assert.throws(()=>verifyCode(f.ctx,f.users.security,c.code),/Code expired/);});
+test('R13-TC03 nonexistent code is rejected',t=>{const f=fixture(t);assert.throws(()=>verifyCode(f.ctx,f.users.security,'NONEXISTENT'),/Invalid code/);});
+test('R13-TC04 empty code is rejected',t=>{const f=fixture(t);assert.throws(()=>verifyCode(f.ctx,f.users.security,''),/required/);});

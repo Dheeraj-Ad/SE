@@ -1,0 +1,32 @@
+State Transition Diagram: Visitor Visit (VisitorRequest + VisitRecord)
+
+
+Rejected
+Pending
+Approved
+Lapsed<br><span style="font-weight:normal">(no-show)</span>
+Inside Campus
+Time Expired
+Exited
+
+
+
+
+[raised by Student / Faculty] /<br>submit visitor request
+[group Excel / CSV]<br>Admin imports file
+[valid temporary code] Security verifies<br>code / record entry
+[direct walk-in] Security registers visitor,<br>assigns permitted time / record entry
+approve [Admin] /<br>notify requester and Security
+reject [Admin] /<br>notify requester
+
+approved date passes<br>[no entry recorded]
+
+visitor verified at gate<br>[within approved date] /<br>record entry_time
+extend time [Security] /<br>update permitted_end
+permitted_end reached [no exit recorded] /<br>alert Security, Admin and visitor
+time extended by Security /<br>new permitted_end
+1 hour past permitted_end /<br>escalation email to Admin
+Security records exit /<br>set exit_time
+Security records exit /<br>set exit_time (late exit)
+record kept in<br>Visitor History
+<b>Notation</b> (UML state machine)<br>Rounded box = state &nbsp;|&nbsp; â— initial &nbsp;|&nbsp; â—‰ final &nbsp;|&nbsp; â—‡ choice on visit type<br>Transition label: event [guard] / action

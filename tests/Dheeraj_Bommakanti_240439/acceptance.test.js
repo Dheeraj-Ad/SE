@@ -1,0 +1,24 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {fixture,valid,approved,inside} from '../helpers.js';
+import {createRequest,decide} from '../../server/modules/Sri_Charan_240660/requests.js';
+import {enterRequest,exitVisit,extendVisit,registerDirect} from '../../server/modules/Dheeraj_Bommakanti_240439/gate.js';
+
+test('Dheeraj-TC01 entry of approved visitor records time and Inside Campus',t=>{const f=fixture(t);const r=approved(f);const v=enterRequest(f.ctx,f.users.security,r.id,true);assert.equal(v.status,'Inside Campus');assert.equal(v.entry_at,f.ctx.now());});
+test('Dheeraj-TC02 pending or rejected visitor cannot enter',t=>{const f=fixture(t);const r=createRequest(f.ctx,f.users.student,valid());assert.throws(()=>enterRequest(f.ctx,f.users.security,r.id,true),/not approved/);decide(f.ctx,f.users.admin,r.id,{decision:'Rejected'});assert.throws(()=>enterRequest(f.ctx,f.users.security,r.id,true),/not approved/);});
+test('Dheeraj-TC03 exit records timestamp and Exited status',t=>{const f=fixture(t);const v=inside(f);const result=exitVisit(f.ctx,f.users.security,v.id);assert.equal(result.status,'Exited');assert.equal(result.exit_at,f.ctx.now());});
+test('Dheeraj-TC04 exit without entry is rejected',t=>{const f=fixture(t);approved(f);assert.throws(()=>exitVisit(f.ctx,f.users.security,1),/no entry record/);});
+test('Dheeraj-TC05 duplicate entry is prevented',t=>{const f=fixture(t);const r=approved(f);enterRequest(f.ctx,f.users.security,r.id,true);assert.throws(()=>enterRequest(f.ctx,f.users.security,r.id,true),/already recorded/);});
+test('Dheeraj-TC06 late exit is recorded and overstay flagged',t=>{const f=fixture(t);const v=inside(f);f.setTime('2026-10-27T07:00:00Z');const result=exitVisit(f.ctx,f.users.security,v.id);assert.equal(result.overstay,1);assert.equal(result.status,'Exited');});
+test('Dheeraj-TC07 valid direct visitor registration succeeds',t=>{const f=fixture(t);const r=registerDirect(f.ctx,f.users.security,valid());assert.equal(r.source,'direct');assert.equal(r.status,'Approved');});
+test('Dheeraj-TC08 direct registration requires mandatory details',t=>{const f=fixture(t);for(const key of ['name','phone','host','purpose','starts_at','ends_at'])assert.throws(()=>registerDirect(f.ctx,f.users.security,valid({[key]:''})));});
+test('Dheeraj-TC09 direct registration rejects invalid phone',t=>{const f=fixture(t);assert.throws(()=>registerDirect(f.ctx,f.users.security,valid({phone:'abc'})),/Invalid phone/);});
+test('Dheeraj-TC10 valid permitted visiting time is assigned',t=>{const f=fixture(t);const data=valid();const r=registerDirect(f.ctx,f.users.security,data);assert.equal(r.starts_at,data.starts_at);assert.equal(r.ends_at,data.ends_at);});
+test('Dheeraj-TC11 end before start is rejected',t=>{const f=fixture(t);assert.throws(()=>registerDirect(f.ctx,f.users.security,valid({ends_at:'2026-10-27T03:00:00Z'})),/after start/);});
+test('Dheeraj-TC12 past permitted date is rejected',t=>{const f=fixture(t);assert.throws(()=>registerDirect(f.ctx,f.users.security,valid({starts_at:'2026-10-26T04:00:00Z'})),/past/);});
+test('Dheeraj-TC13 visiting time can be extended',t=>{const f=fixture(t);const v=inside(f);const r=extendVisit(f.ctx,f.users.security,v.id,{ends_at:'2026-10-27T07:30:00Z'});assert.equal(r.permitted_end,'2026-10-27T07:30:00.000Z');});
+test('Dheeraj-TC14 extension cannot reduce permitted time',t=>{const f=fixture(t);const v=inside(f);assert.throws(()=>extendVisit(f.ctx,f.users.security,v.id,{ends_at:'2026-10-27T05:30:00Z'}),/after the current/);});
+test('Dheeraj-TC15 extending unknown visitor is rejected',t=>{const f=fixture(t);assert.throws(()=>extendVisit(f.ctx,f.users.security,999,{ends_at:'2026-10-27T07:30:00Z'}),/Visitor not found/);});
+test('Dheeraj-TC16 exited visitor cannot be extended',t=>{const f=fixture(t);const v=inside(f);exitVisit(f.ctx,f.users.security,v.id);assert.throws(()=>extendVisit(f.ctx,f.users.security,v.id,{ends_at:'2026-10-27T07:30:00Z'}),/exited/);});
+test('Dheeraj-TC17 repeated extensions retain the latest end',t=>{const f=fixture(t);const v=inside(f);extendVisit(f.ctx,f.users.security,v.id,{ends_at:'2026-10-27T07:30:00Z'});const r=extendVisit(f.ctx,f.users.security,v.id,{ends_at:'2026-10-27T08:30:00Z'});assert.equal(r.permitted_end,'2026-10-27T08:30:00.000Z');});
+test('Dheeraj-TC18 empty extension input is rejected',t=>{const f=fixture(t);const v=inside(f);assert.throws(()=>extendVisit(f.ctx,f.users.security,v.id,{ends_at:''}),/valid date/);});

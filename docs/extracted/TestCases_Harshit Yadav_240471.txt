@@ -1,0 +1,66 @@
+LOBBY – Visitor Management System
+Coding Module Test Cases
+R11: Admin can import group visitor details from Excel or CSV
+Test Case ID
+Test Case Description
+Input
+Expected Output
+R11-TC01
+Import a valid file
+File with all required columns
+Records are imported and shown for Admin review
+R11-TC02
+Import an unsupported file type
+A .pdf or .txt file
+Error message: unsupported format
+R11-TC03
+Import a file with a missing required column
+File without the phone column
+Error message is displayed, file is not imported
+R11-TC04
+Approve the imported group after review
+Click "Approve" on the imported list
+Group status becomes "Approved" and the list is visible to Security
+R12: Admin can create temporary visitor codes
+Test Case ID
+Test Case Description
+Input
+Expected Output
+R12-TC01
+Create a code with a valid period
+Faculty details, start and end date
+Unique code is generated and stored
+R12-TC02
+Create a code with an end date before the start date
+Start 25 Oct, end 20 Oct
+Error message is displayed
+R12-TC03
+Create a code with empty fields
+Faculty name left blank
+Validation message is displayed
+R12-TC04
+Generate two codes
+Create two codes one after another
+Both codes are different (unique)
+R13: Security Staff can verify temporary visitor codes
+Test Case ID
+Test Case Description
+Input
+Expected Output
+R13-TC01
+Verify a valid active code
+Active code
+Visitor details are shown and entry is allowed
+R13-TC02
+Verify an expired code
+Code past its end date
+Error message: code expired, entry denied
+R13-TC03
+Verify a non-existent code
+Random code that was never created
+Error message: invalid code
+R13-TC04
+Verify with an empty code field
+Field left blank
+Validation message is displayed
+

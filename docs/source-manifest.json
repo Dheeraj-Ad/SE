@@ -1,0 +1,95 @@
+{
+  "sourceDirectory": "C:/Users/DHEERAJ/Downloads",
+  "files": [
+    {
+      "name": "Lab1 Planning_LOBBY (visitor management system).pdf",
+      "sha256": "27fef374b729006593538da25f6bae6e61f1acdd9ad6a74844ff639db960dd28",
+      "bytes": 582595
+    },
+    {
+      "name": "LOBBY_Design Tasks.docx",
+      "sha256": "13717affe90eae6ac3f51722b00795ac04251a24807b5763a39c85179db3db31",
+      "bytes": 286688
+    },
+    {
+      "name": "LOBBY_DFD_Level0_Context (1).drawio",
+      "sha256": "62d09461929b3df4f5470494dfae63da288e41e63e51b9a581f9a24c4687ebaf",
+      "bytes": 6283
+    },
+    {
+      "name": "LOBBY_DFD_Level0_Context (2).drawio",
+      "sha256": "62d09461929b3df4f5470494dfae63da288e41e63e51b9a581f9a24c4687ebaf",
+      "bytes": 6283
+    },
+    {
+      "name": "LOBBY_DFD_Level0_Context.drawio",
+      "sha256": "62d09461929b3df4f5470494dfae63da288e41e63e51b9a581f9a24c4687ebaf",
+      "bytes": 6283
+    },
+    {
+      "name": "LOBBY_DFD_Level1 (1).drawio",
+      "sha256": "82fe46be9202a1412817726ca1a1c40af71cf8deecad8c758b7c50fb2020b07c",
+      "bytes": 21081
+    },
+    {
+      "name": "LOBBY_DFD_Level1.drawio",
+      "sha256": "9dd2e0859edd9f1c77a7274a7e88887e853b580b80403539215b5d299cc10c95",
+      "bytes": 19777
+    },
+    {
+      "name": "LOBBY_MoSCoW Requirement Prioritization_Report.pdf",
+      "sha256": "cbd0d7b741f4dc12e52031a435a270f7617747644632ac6a2f8c1d71b62ec959",
+      "bytes": 210606
+    },
+    {
+      "name": "LOBBY_Sequence_Diagram (1).drawio",
+      "sha256": "fa21b0da5b33aad915ff7b1d15f405d92ef3be29290b0a381b9ee1d64085bfd2",
+      "bytes": 28417
+    },
+    {
+      "name": "LOBBY_Sequence_Diagram.drawio",
+      "sha256": "707b86660676c9c7c7c03fb036e01fc760984e097ad14e0b1ba720b78157c2f9",
+      "bytes": 27098
+    },
+    {
+      "name": "LOBBY_State_Transition_Diagram (1).drawio",
+      "sha256": "c5ba3bd2230a96dfe079b92f20e13970e8053019d79496c753c427c69a248d4a",
+      "bytes": 12767
+    },
+    {
+      "name": "LOBBY_State_Transition_Diagram.drawio",
+      "sha256": "b48fafee48aa832b5a78bc15e873c288374fa3451955ce8af2c43e0c04a512ab",
+      "bytes": 12683
+    },
+    {
+      "name": "LOBBY_Use Case Diagram.drawio",
+      "sha256": "74e8561e1ddd187f592efc7323b2086308838bf5f4951d7ef60f06e62ea6a0b4",
+      "bytes": 18324
+    },
+    {
+      "name": "LOBBY_Visitor Management System_SRS_v1.0.pdf",
+      "sha256": "3663848f13868b841d0820bb91b96199726b9ca1e70ccbc01df8aa6e19d74ad0",
+      "bytes": 476110
+    },
+    {
+      "name": "TestCases_Harshit Yadav_240471.docx",
+      "sha256": "176ff3f158af437209bfcf7c66658e329e1692c4342b5532811fb3ff5ccd7778",
+      "bytes": 16202
+    },
+    {
+      "name": "TestCases_Sri_Charan_240660.pdf",
+      "sha256": "250ec3c59c0031255858f7079aca58e71cd6704bec0340770d282d08811556e2",
+      "bytes": 46781
+    },
+    {
+      "name": "TestCases_Sri_Surya_240495.pdf",
+      "sha256": "e2a1319cf771087f7773f13b005aa553b4ef1f0e0c6f0b30165af060f4beefb2",
+      "bytes": 36471
+    },
+    {
+      "name": "Visitor_Management_Test_Cases.docx",
+      "sha256": "0fc7e388fd2121c7a2d72409d9f93a3ecbfd675bab206ead1258a8d3be822129",
+      "bytes": 17388
+    }
+  ]
+}
