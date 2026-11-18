@@ -10,7 +10,11 @@ async function api(path,options={}){
   if(options.method&&options.method!=='GET')headers['X-CSRF-Token']=state.csrf;
   let response;
   try{response=await fetch('/api'+path,{...options,headers,body:options.body instanceof FormData?options.body:options.body?JSON.stringify(options.body):undefined});}catch{throw new Error('Cannot reach LOBBY. Check your connection and try again.');}
-  const data=await response.json();
+  const unavailable=()=>new Error(`The sign-in service is unavailable (HTTP ${response.status}). Please try again later or contact your campus administrator.`);
+  if(!response.headers.get('content-type')?.toLowerCase().includes('application/json'))throw unavailable();
+  let data;
+  try{data=await response.json();}catch{throw unavailable();}
+  if(data===null||typeof data!=='object')throw unavailable();
   if(!response.ok){if(response.status===401&&state.user){state.user=null;closeModal();renderLogin();}throw new Error(data.error||'Request failed');}
   return data;
 }

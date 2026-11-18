@@ -54,6 +54,20 @@ The supplied documents explicitly exclude biometrics, facial recognition, RFID, 
 
 Use a visiting end time within the next 15 minutes to demonstrate a reminder. Keep the server running; the worker runs on startup and every 30 seconds. Outbox messages and in-app alerts persist across restarts.
 
+## Hosting and Vercel
+
+This application currently requires a long-running Node.js server, a writable persistent disk for SQLite, and the notification worker in `server/index.js`. Uploading `public/` only serves the interface; it does not deploy the `/api` routes or create login accounts.
+
+The demonstration accounts are created by `npm run setup` in the database selected by `DATABASE_PATH`. The local database and `.env` are intentionally excluded from Git. Run setup against the hosted database before signing in; deploying the repository alone does not create accounts.
+
+The current backend cannot run unchanged in Vercel Functions. Vercel's filesystem is read-only except for temporary, instance-local `/tmp` storage, which cannot persist users, sessions, or visitor records. Moving SQLite to `/tmp` or seeding it during a build does not solve this. See [Vercel filesystem support](https://vercel.com/docs/functions/runtimes#file-system-support).
+
+To keep this backend, deploy a single Node.js process with persistent disk, set `HOST=0.0.0.0`, configure `PORT` and `DATABASE_PATH` for that host, run `npm run setup`, and start with `npm start`. Serve the interface and API together over HTTPS and set `SECURE_COOKIES=true`.
+
+To run the backend on Vercel, first migrate database access to a hosted database, provide a [supported Express entry point](https://vercel.com/docs/frameworks/backend/express), provision accounts, and replace the interval worker with a scheduled service. This migration is not included in the current application.
+
+If login reports that the service is unavailable, check `/api/health` on the deployed domain. A working backend returns `{"status":"ok"}` as JSON. A text/HTML error page indicates a routing or backend availability problem; changing the login password will not fix that response.
+
 ## Email configuration
 
 `.env` is created from `.env.example` during setup. The default is `MAIL_MODE=outbox`: messages are recorded in Admin’s **Email outbox**, marked `local`, and are **not delivered externally**.
