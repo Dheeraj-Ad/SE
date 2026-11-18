@@ -56,17 +56,24 @@ Use a visiting end time within the next 15 minutes to demonstrate a reminder. Ke
 
 ## Hosting and Vercel
 
-This application currently requires a long-running Node.js server, a writable persistent disk for SQLite, and the notification worker in `server/index.js`. Uploading `public/` only serves the interface; it does not deploy the `/api` routes or create login accounts.
+Vercel now runs a **public demonstration** with four hardcoded accounts. No hosted database or environment variables are required:
 
-The demonstration accounts are created by `npm run setup` in the database selected by `DATABASE_PATH`. The local database and `.env` are intentionally excluded from Git. Run setup against the hosted database before signing in; deploying the repository alone does not create accounts.
+| Role | Email | Password |
+|---|---|---|
+| Admin | `admin@lobby.local` | `Lobby@2026!` |
+| Faculty | `faculty@lobby.local` | `Lobby@2026!` |
+| Security | `security@lobby.local` | `Lobby@2026!` |
+| Student | `student@lobby.local` | `Lobby@2026!` |
 
-The current backend cannot run unchanged in Vercel Functions. Vercel's filesystem is read-only except for temporary, instance-local `/tmp` storage, which cannot persist users, sessions, or visitor records. Moving SQLite to `/tmp` or seeding it during a build does not solve this. See [Vercel filesystem support](https://vercel.com/docs/functions/runtimes#file-system-support).
+Keep the Vercel project's **Root Directory at the repository root**, not `public`. `vercel.json` serves `public/` and routes `/api/*` to `api/index.js`. The configured `npm run build:vercel` creates a private deployment session key bundled with the API function; it is ignored by Git and is never copied to `public/`. Push to the connected branch or redeploy the latest commit. Use Node.js 24 or newer.
 
-To keep this backend, deploy a single Node.js process with persistent disk, set `HOST=0.0.0.0`, configure `PORT` and `DATABASE_PATH` for that host, run `npm run setup`, and start with `npm start`. Serve the interface and API together over HTTPS and set `SECURE_COOKIES=true`.
+Each function instance creates the fixed accounts in an in-memory SQLite database. Signed demo login sessions work across instances of the same deployment, and redeploying invalidates them. Logout clears the browser cookie. Demo sessions are not centrally revocable, and the public accounts cannot change their passwords or roles. Existing local password authentication and persistent SQLite are unchanged.
 
-To run the backend on Vercel, first migrate database access to a hosted database, provide a [supported Express entry point](https://vercel.com/docs/frameworks/backend/express), provision accounts, and replace the interval worker with a scheduled service. This migration is not included in the current application.
+**Demo records, newly created users, and login throttling are instance-local. They can reset after inactivity and may differ between requests routed to separate instances.** Use synthetic data only. Outbox mail is local, with no external delivery or background notification scheduler in the demo. A persistent hosted database and a scheduler are still required for real campus use. See [Vercel filesystem support](https://vercel.com/docs/functions/runtimes#file-system-support).
 
-If login reports that the service is unavailable, check `/api/health` on the deployed domain. A working backend returns `{"status":"ok"}` as JSON. A text/HTML error page indicates a routing or backend availability problem; changing the login password will not fix that response.
+For persistent operation with the existing backend, deploy a single Node.js process with persistent disk, set `HOST=0.0.0.0`, configure `PORT` and `DATABASE_PATH`, run `npm run setup`, and start with `npm start`. Serve the interface and API together over HTTPS and set `SECURE_COOKIES=true`.
+
+If login reports that the service is unavailable, check `/api/health` on the deployed domain. The Vercel demo returns `{"status":"ok","demo":true}` as JSON. A text/HTML error page indicates a routing or backend availability problem; verify that Vercel deployed the latest commit from the repository root.
 
 ## Email configuration
 

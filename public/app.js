@@ -158,4 +158,7 @@ document.addEventListener('submit',async event=>{
 });
 window.addEventListener('hashchange',()=>{const page=location.hash.slice(1);if(state.user&&page!==state.page&&navPages().includes(page))navigate(page);});
 setInterval(()=>{if(state.user){refreshNotifications();if(state.page==='dashboard'&&!$('#modal').open)renderPage();}},30000);
+api('/health').then(health=>{
+  if(health.demo){const notice=document.createElement('aside');notice.className='demo-notice';notice.textContent='Demo mode: shared test accounts. Records are temporary and may reset or differ between requests. Use sample data only.';document.body.prepend(notice);}
+}).catch(()=>{});
 try{const result=await api('/auth/me');Object.assign(state,result);state.page=navPages().includes(location.hash.slice(1))?location.hash.slice(1):'dashboard';shell();await navigate(state.page);}catch{renderLogin();}

@@ -15,6 +15,7 @@ import { records, detail, report, dashboard, csv } from './modules/Sri_Surya_240
 
 export function createApp(options={}) {
   const ctx={db:options.db??openDatabase(process.env.DATABASE_PATH),now:options.now??(()=>new Date().toISOString()),timezone:options.timezone??process.env.CAMPUS_TIMEZONE??'Asia/Kolkata',sessionHours:Number(process.env.SESSION_HOURS??8),dummyHash:hashPassword('invalid-password-placeholder'),mailer:options.mailer??createMailer()};
+  ctx.demo=options.demo===true;ctx.demoSessions=options.demoSessions;
   const app=express(); app.disable('x-powered-by');
   app.use(helmet({contentSecurityPolicy:{directives:{defaultSrc:["'self'"],scriptSrc:["'self'"],styleSrc:["'self'"],imgSrc:["'self'",'data:'],connectSrc:["'self'"],upgradeInsecureRequests:null}}}));
   app.use(express.json({limit:'1mb'}));
@@ -31,10 +32,10 @@ export function createApp(options={}) {
   const route=fn=>(req,res,next)=>Promise.resolve().then(()=>fn(req,res)).catch(next);
   const admin=(req,res,next)=>{try{requireRole(req.user,'admin');next();}catch(e){next(e);}};
   const getId=req=>{const id=Number(req.params.id);assert(Number.isSafeInteger(id)&&id>0,'Invalid record ID');return id;};
-  app.get('/api/health',(req,res)=>res.json({status:'ok'}));
+  app.get('/api/health',(req,res)=>res.json({status:'ok',...(ctx.demo?{demo:true}:{} )}));
   app.post('/api/auth/login',route((req,res)=>{
     const result=login(ctx,req.body.email,req.body.password,req.ip);
-    res.cookie('lobby_session',result.token,{httpOnly:true,sameSite:'strict',secure:process.env.SECURE_COOKIES==='true',maxAge:ctx.sessionHours*3600000,path:'/'});
+    res.cookie('lobby_session',result.token,{httpOnly:true,sameSite:'strict',secure:options.secureCookies??process.env.SECURE_COOKIES==='true',maxAge:ctx.sessionHours*3600000,path:'/'});
     res.json({user:result.user,csrf:result.csrf,timezone:ctx.timezone});
   }));
   app.use('/api',(req,res,next)=>{
@@ -49,6 +50,7 @@ export function createApp(options={}) {
   app.get('/api/auth/me',(req,res)=>res.json({user:req.user,csrf:req.csrf,timezone:ctx.timezone}));
   app.post('/api/auth/logout',route((req,res)=>{run(ctx.db,'DELETE FROM sessions WHERE token_hash=?',digest(req.sessionToken));res.clearCookie('lobby_session',{path:'/'});res.json({message:'Signed out'});}));
   app.post('/api/auth/password',route((req,res)=>{
+    assert(!ctx.demo,'Demo account passwords are fixed.',403);
     // Reauthentication is required even when the session is valid.
     const hash=hashPassword(req.body.password);
     const confirmed=login(ctx,req.user.email,req.body.current_password,req.ip);
@@ -86,7 +88,7 @@ export function createApp(options={}) {
   }));
   app.get('/api/users',admin,route((req,res)=>res.json(listUsers(ctx))));
   app.post('/api/users',admin,route((req,res)=>res.status(201).json(createUser(ctx,req.user,req.body))));
-  app.patch('/api/users/:id',admin,route((req,res)=>res.json(updateUser(ctx,req.user,getId(req),req.body))));
+  app.patch('/api/users/:id',admin,route((req,res)=>{assert(!ctx.demo,'Demo accounts are fixed.',403);res.json(updateUser(ctx,req.user,getId(req),req.body));}));
   app.get('/api/notifications',route((req,res)=>res.json(all(ctx.db,'SELECT * FROM notifications WHERE user_id=? ORDER BY id DESC LIMIT 200',req.user.id))));
   app.post('/api/notifications/read',route((req,res)=>{run(ctx.db,'UPDATE notifications SET read_at=? WHERE user_id=? AND read_at IS NULL',ctx.now(),req.user.id);res.json({message:'Notifications marked as read'});}));
   app.get('/api/admin/audit',admin,route((req,res)=>res.json(all(ctx.db,'SELECT a.*,u.name AS actor FROM audit a LEFT JOIN users u ON u.id=a.actor_id ORDER BY a.id DESC LIMIT 500'))));

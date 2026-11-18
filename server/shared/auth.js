@@ -39,14 +39,17 @@ export function login(ctx, email, password, ip = 'local') {
     assert(false, 'Invalid email or password', 401);
   }
   run(ctx.db,'DELETE FROM login_attempts WHERE key=?',key);
-  const token = randomBytes(32).toString('hex'), csrf = randomBytes(24).toString('hex');
+  let token = randomBytes(32).toString('hex');
+  const csrf = randomBytes(24).toString('hex');
   const expires = new Date(Date.parse(ctx.now()) + ctx.sessionHours * 3600000).toISOString();
-  run(ctx.db,'INSERT INTO sessions VALUES(?,?,?,?)',digest(token),user.id,csrf,expires);
+  if(ctx.demoSessions && ['admin','faculty','security','student'].some(role=>user.email===`${role}@lobby.local`))token=ctx.demoSessions.issue(user,csrf,expires);
+  else run(ctx.db,'INSERT INTO sessions VALUES(?,?,?,?)',digest(token),user.id,csrf,expires);
   audit(ctx,user,'session.login','user',user.id);
   return {token,csrf,user:publicUser(user)};
 }
 export function authenticate(ctx, token) {
   assert(token, 'Please sign in', 401);
+  if(ctx.demoSessions && token.startsWith('demo.')){const session=ctx.demoSessions.read(ctx,token);return {user:publicUser(session.user),csrf:session.csrf};}
   const session = one(ctx.db,'SELECT s.*, u.* FROM sessions s JOIN users u ON u.id=s.user_id WHERE token_hash=? AND expires_at>? AND u.active=1',digest(token),ctx.now());
   assert(session, 'Session expired. Please sign in again.',401);
   return {user:publicUser(session),csrf:session.csrf};
